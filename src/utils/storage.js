@@ -79,17 +79,21 @@ export function emptySession(id) {
   }
 }
 
+const DEFAULT_SETTINGS = {
+  apiKey: '',
+  openaiKey: '',
+  anthropicKey: '',
+  googleKey: '',
+  theme: 'ember',
+  model: 'openrouter/free',
+}
+
 export function loadSettings() {
   try {
-    return JSON.parse(localStorage.getItem(SETTINGS_KEY) || 'null') || {
-      apiKey: '',
-      openaiKey: '',
-      anthropicKey: '',
-      googleKey: '',
-      theme: 'ember',
-      model: 'openrouter/free',
-    }
-  } catch { return { apiKey: '', openaiKey: '', anthropicKey: '', googleKey: '', theme: 'ember', model: 'openrouter/free' } }
+    const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY))
+    if (!saved) return { ...DEFAULT_SETTINGS }
+    return { ...DEFAULT_SETTINGS, ...saved }
+  } catch { return { ...DEFAULT_SETTINGS } }
 }
 
 export function saveSettings(s) {

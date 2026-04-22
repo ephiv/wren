@@ -238,10 +238,10 @@ export default function App() {
               onModelChange={handleModelChange}
               theme={settings.theme}
               onThemeChange={handleThemeChange}
-              apiKey={settings.apiKey}
-              openaiKey={settings.openaiKey}
-              anthropicKey={settings.anthropicKey}
-              googleKey={settings.googleKey}
+              apiKey={settings.apiKey || ''}
+              openaiKey={settings.openaiKey || ''}
+              anthropicKey={settings.anthropicKey || ''}
+              googleKey={settings.googleKey || ''}
               onError={setError}
               onSave={saveActive}
             />
@@ -254,10 +254,10 @@ export default function App() {
               onModelChange={handleModelChange}
               theme={settings.theme}
               onThemeChange={handleThemeChange}
-              apiKey={settings.apiKey}
-              openaiKey={settings.openaiKey}
-              anthropicKey={settings.anthropicKey}
-              googleKey={settings.googleKey}
+              apiKey={settings.apiKey || ''}
+              openaiKey={settings.openaiKey || ''}
+              anthropicKey={settings.anthropicKey || ''}
+              googleKey={settings.googleKey || ''}
               onError={setError}
               onSave={saveActive}
             />
