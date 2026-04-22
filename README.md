@@ -16,14 +16,20 @@ npm run dev
 
 ## get an api key
 
-wren runs on **OpenRouter** — a free gateway to dozens of open-source models (Qwen, Llama, Gemma, etc.).
+wren supports multiple providers. You need at least one:
 
+### Free (OpenRouter)
 1. go to [openrouter.ai/keys](https://openrouter.ai/keys)
 2. create a free account
 3. generate an API key
-4. paste it into wren's settings (⚙ icon in the sidebar)
+4. paste it into settings (⚙ icon)
 
-free models never charge — you just need the key to authenticate.
+### Paid providers (optional)
+- OpenAI: [platform.openai.com](https://platform.openai.com) - for GPT-4o, o1, o3
+- Anthropic: [console.anthropic.com](https://console.anthropic.com) - for Claude models
+- Google: [aistudio.google.com](https://aistudio.google.com) - for Gemini models
+
+Add your paid keys in settings to enable those models.
 
 ## features
 

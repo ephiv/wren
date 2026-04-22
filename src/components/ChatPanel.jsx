@@ -7,10 +7,29 @@ import { callWithMemory } from '../utils/api.js'
 import { CHAT_SYSTEM, CHAT_CHIPS } from '../constants/prompts.js'
 
 function parseResponse(text) {
-  const match = text.match(/<roadmap>([\s\S]*?)<\/roadmap>/)
   let roadmap = null
-  let prose = text.replace(/<roadmap>[\s\S]*?<\/roadmap>/, '').trim()
-  if (match) { try { roadmap = JSON.parse(match[1].trim()) } catch (e) {} }
+  let prose = text
+
+  // Try <roadmap></roadmap> tags (primary format)
+  let match = text.match(/<roadmap>([\s\S]*?)<\/roadmap>/)
+  if (match) {
+    prose = text.replace(/<roadmap>[\s\S]*?<\/roadmap>/, '').trim()
+  } else {
+    // Try markdown code blocks: ```json ... ``` or ``` ... ```
+    match = text.match(/```json?\s*([\s\S]*?)```/)
+  }
+
+  if (match) {
+    try {
+      let jsonStr = match[1].trim()
+      // Remove leading/trailing backticks if present
+      jsonStr = jsonStr.replace(/^`+/, '').replace(/`+$/, '').trim()
+      roadmap = JSON.parse(jsonStr)
+    } catch (e) {
+      console.warn('roadmap parse failed:', e)
+    }
+  }
+
   return { prose, roadmap }
 }
 
